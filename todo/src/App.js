@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 
 import { connect } from "react-redux";
-import { addTodo } from "./actions";
+import { addNewTodo } from "./actions";
 import Todo from "./components/Todo";
 
 class App extends Component {
@@ -13,6 +13,11 @@ class App extends Component {
   handleChange = event => {
     this.setState({ newTodo: event.target.value });
   };
+
+  addTodo = event => { 
+    event.preventDefault();
+    this.props.addNewTodo(this.state.newTodo);
+  }
 
   render() {
     return (
@@ -29,6 +34,8 @@ class App extends Component {
           onChange={this.handleChange}
           placeholder="New todo"
         />
+        
+        <button onClick={this.addTodo}>Add todo</button>
       </div>
     );
   }
@@ -43,5 +50,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { addTodo }
+  { addNewTodo }
 )(App);
