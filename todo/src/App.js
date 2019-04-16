@@ -6,6 +6,13 @@ import { addTodo } from "./actions";
 import Todo from "./components/Todo";
 
 class App extends Component {
+  state = { 
+    newTodo: ""
+  }
+
+  handleChange = event => {
+    this.setState({ newTodo: event.target.value });
+  };
 
   render() {
     return (
@@ -15,13 +22,20 @@ class App extends Component {
         {this.props.todos.map(todo => (
           <Todo todo={todo} />
         ))}
+
+        <input
+          type="text"
+          value={this.state.newTodo}
+          onChange={this.handleChange}
+          placeholder="New todo"
+        />
       </div>
     );
   }
 }
 
 const mapStateToProps = state => {
-  console.log(state)
+  console.log(state);
   return {
     todos: state.todos
   };
